@@ -32,8 +32,7 @@ export class GHL {
   decryptSSOData(key: string) {
     console.log(key);
     const data = CryptoJS.AES.decrypt(
-      key,
-      // "03d20a55-535c-40d1-a5a6-1535d215fb44"
+      key.toString(),
       process.env.GHL_APP_SSO_KEY as string
     ).toString(CryptoJS.enc.Utf8);
     console.log(data);

@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 import { GHL } from "./ghl";
 import * as CryptoJS from "crypto-js";
 import { json } from "body-parser";
+import { log } from "console";
 
 const path = __dirname + "/ui/dist/";
 
@@ -109,6 +110,8 @@ app.post("/decrypt-sso", async (req: Request, res: Response) => {
   }
   try {
     const data = ghl.decryptSSOData(key);
+    console.log(data);
+
     res.send(data);
   } catch (error) {
     res.status(400).send("Invalid Key");

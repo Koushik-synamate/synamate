@@ -3,7 +3,7 @@ decrypting the response using a key. */
 export class GHL {
   appId;
 
-  constructor() {}
+  constructor() { }
 
   async getUserData() {
     const key = await new Promise((resolve) => {
@@ -15,14 +15,15 @@ export class GHL {
       });
     });
     const res = await fetch('/decrypt-sso', {
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({key})
-      });
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ key })
+    });
     const data = await res.json()
+    console.log(data);
     return data
   }
 }
