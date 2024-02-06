@@ -1,7 +1,7 @@
 import { createApp } from "vue";
 import App from "./App.vue";
 import { GHL } from "./ghl";
-
+import './index.css'
 const ghl = new GHL();
 window.ghl = ghl;
 

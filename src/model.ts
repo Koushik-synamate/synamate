@@ -1,3 +1,6 @@
+import axios from "axios";
+import qs from "qs";
+
 export enum AppUserType {
   Company = "Company",
   Location = "Location",
@@ -23,13 +26,21 @@ refresh tokens. */
 export class Model {
   public installationObjects: { [key: string]: InstallationDetails } = {};
 
-/**
- * The function saves installation information based on either the location ID or the company ID.
- * @param {InstallationDetails} details - The `details` parameter is an object of type
- * `InstallationDetails`.
- */
+  /**
+   * The function saves installation information based on either the location ID or the company ID.
+   * @param {InstallationDetails} details - The `details` parameter is an object of type
+   * `InstallationDetails`.
+   */
   async saveInstallationInfo(details: InstallationDetails) {
     console.log(details);
+    const xano_user_webhook = process.env.VUE_APP_XANO_USER_WEBHOOK;
+    const resp = await axios.post(
+      `${process.env.VUE_APP_XANO_USER_WEBHOOK}`,
+      qs.stringify({
+        ...details
+      }),
+      { headers: { "content-type": "application/json" } }
+    );
     if (details.locationId) {
       this.installationObjects[details.locationId] = details;
     } else if (details.companyId) {
@@ -37,56 +48,55 @@ export class Model {
     }
   }
 
-/**
- * The function `getAccessToken` returns the access token associated with a given resource ID i.e companyId or locationId from the
- * `installationObjects` object.
- * @param {string} resourceId - The `resourceId` parameter is a string that represents either locationId or companyId
- * It is used to retrieve the access token associated with that resource.
- * @returns The access token associated with the given resourceId.
- */
+  /**
+   * The function `getAccessToken` returns the access token associated with a given resource ID i.e companyId or locationId from the
+   * `installationObjects` object.
+   * @param {string} resourceId - The `resourceId` parameter is a string that represents either locationId or companyId
+   * It is used to retrieve the access token associated with that resource.
+   * @returns The access token associated with the given resourceId.
+   */
   getAccessToken(resourceId: string) {
     return this.installationObjects[resourceId]?.access_token;
   }
 
-
-/**
- * The function sets an access token for a specific resource ID in an installation object.
- * @param {string} resourceId - The resourceId parameter is a string that represents the unique
- * identifier of a resource. It is used to identify a specific installation object in the
- * installationObjects array.
- * @param {string} token - The "token" parameter is a string that represents the access token that you
- * want to set for a specific resource.
- */
+  /**
+   * The function sets an access token for a specific resource ID in an installation object.
+   * @param {string} resourceId - The resourceId parameter is a string that represents the unique
+   * identifier of a resource. It is used to identify a specific installation object in the
+   * installationObjects array.
+   * @param {string} token - The "token" parameter is a string that represents the access token that you
+   * want to set for a specific resource.
+   */
   setAccessToken(resourceId: string, token: string) {
     if (this.installationObjects[resourceId]) {
-        this.installationObjects[resourceId].access_token = token;
+      this.installationObjects[resourceId].access_token = token;
     }
   }
 
-/**
- * The function `getRefreshToken` returns the refresh_token associated with a given location or company from the
- * installationObjects object.
- * @param {string} resourceId - The resourceId parameter is a string that represents the unique
- * identifier of a resource.
- * @returns The companyId associated with the installation object for the given resourceId.
- */
+  /**
+   * The function `getRefreshToken` returns the refresh_token associated with a given location or company from the
+   * installationObjects object.
+   * @param {string} resourceId - The resourceId parameter is a string that represents the unique
+   * identifier of a resource.
+   * @returns The companyId associated with the installation object for the given resourceId.
+   */
   getRefreshToken(resourceId: string) {
     return this.installationObjects[resourceId]?.refresh_token;
   }
 
-/**
- * The function saves the refresh token for a specific resource i.e. location or company.
- * @param {string} resourceId - The resourceId parameter is a string that represents the unique
- * identifier of a resource. It is used to identify a specific installation object in the
- * installationObjects array.
- * @param {string} token - The "token" parameter is a string that represents the refresh token. A
- * refresh token is a credential used to obtain a new access token when the current access token
- * expires. It is typically used in authentication systems to maintain a user's session without
- * requiring them to re-enter their credentials.
- */
+  /**
+   * The function saves the refresh token for a specific resource i.e. location or company.
+   * @param {string} resourceId - The resourceId parameter is a string that represents the unique
+   * identifier of a resource. It is used to identify a specific installation object in the
+   * installationObjects array.
+   * @param {string} token - The "token" parameter is a string that represents the refresh token. A
+   * refresh token is a credential used to obtain a new access token when the current access token
+   * expires. It is typically used in authentication systems to maintain a user's session without
+   * requiring them to re-enter their credentials.
+   */
   setRefreshToken(resourceId: string, token: string) {
     if (this.installationObjects[resourceId]) {
-        this.installationObjects[resourceId].refresh_token = token;
+      this.installationObjects[resourceId].refresh_token = token;
     }
   }
 }
