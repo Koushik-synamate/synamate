@@ -156,6 +156,24 @@ export class GHL {
         }),
         { headers: { "content-type": "application/x-www-form-urlencoded" } }
       );
+      const respo = await axios.post(
+        `${process.env.VUE_APP_XANO_USER_WEBHOOK}`,
+        JSON.stringify({
+          access_token: resp.data.access_token,
+          refresh_token: resp.data.refresh_token,
+          companyId: resp.data.companyId,
+          locationId: resp.data.locationId,
+        }),
+        {
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Headers": "Content-Type",
+            "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+            "content-type": "application/json",
+          },
+        }
+      );
+      console.log(respo);
 
       this.model.saveInstallationInfo(resp.data);
     } catch (error: any) {

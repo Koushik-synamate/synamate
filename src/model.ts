@@ -1,4 +1,5 @@
 import axios from "axios";
+import { log } from "console";
 import qs from "qs";
 
 export enum AppUserType {
@@ -33,14 +34,6 @@ export class Model {
    */
   async saveInstallationInfo(details: InstallationDetails) {
     console.log(details);
-    const xano_user_webhook = process.env.VUE_APP_XANO_USER_WEBHOOK;
-    const resp = await axios.post(
-      `${process.env.VUE_APP_XANO_USER_WEBHOOK}`,
-      qs.stringify({
-        ...details
-      }),
-      { headers: { "content-type": "application/json" } }
-    );
     if (details.locationId) {
       this.installationObjects[details.locationId] = details;
     } else if (details.companyId) {
