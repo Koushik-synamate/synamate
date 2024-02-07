@@ -1,4 +1,2 @@
-[dev]
-    command = "npm start"
-    framework = "#custom"
-    targetPort = 3000
+[build]
+  command = "npm start"  # Replace this with your actual start command
