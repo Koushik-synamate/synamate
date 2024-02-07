@@ -23,7 +23,7 @@ export default {
     const searchParams = new URLSearchParams(window.location.search);
     const code = searchParams.get("code");
     const state = searchParams.get("state");
-    
+
     console.log(code);
     if (code && state) {
       // const tokenRequestOptions = {
@@ -51,7 +51,7 @@ export default {
         // );
         const tokenData = await window.ghl.getRazorpayToken(code);
         const rzp_user_update_webhook =
-          "https://x8ki-letl-twmt.n7.xano.io/api:T7Cv6cHs/users_oauth_razorpay";
+          "https://x8ki-letl-twmt.n7.xano.io/api:b4aEH6dM/insert_rzp_id";
         if (!tokenData.error) {
           const userRazorpayRequestOptions = {
             method: "POST",
