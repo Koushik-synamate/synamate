@@ -10,8 +10,6 @@ const path = __dirname + "/ui/dist/";
 dotenv.config();
 const app: Express = express();
 app.use(json({ type: "application/json" }));
-const router = express.Router();
-app.use("/.netlify/functions/api", router);
 /*`app.use(express.static(path));` is setting up a middleware in the Express server. The
 `express.static` middleware is used to serve static files such as HTML, CSS, JavaScript, and images. */
 app.use(express.static(path));
