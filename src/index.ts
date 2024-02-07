@@ -13,7 +13,6 @@ app.use(json({ type: "application/json" }));
 /*`app.use(express.static(path));` is setting up a middleware in the Express server. The
 `express.static` middleware is used to serve static files such as HTML, CSS, JavaScript, and images. */
 app.use(express.static(path));
-
 /* The line `const ghl = new GHL();` is creating a new instance of the `GHL` class. It is assigning
 this instance to the variable `ghl`. This allows you to use the methods and properties defined in
 the `GHL` class to interact with the GoHighLevel API. */
@@ -120,13 +119,14 @@ app.post("/decrypt-sso", async (req: Request, res: Response) => {
   res.sendFile(path + "index.html");
 });` sets up a route for the root URL ("/") of the server.  This is
  used to serve the main HTML file of a web application. */
-app.get("/", function (req, res) {
+app.get("*", function (req, res) {
   res.sendFile(path + "index.html");
+  // res.sendFile(path.join(__dirname, "ui", "dist", "index.html"));
 });
 
 /*`app.listen(port, () => {
   console.log(`GHL app listening on port `);
 });` is starting the Express server and making it listen on the specified port. */
 app.listen(port, () => {
-  console.log(`GHL app listening on port ${port}`);
+  console.log(`Synamate app listening on port ${port}`);
 });
