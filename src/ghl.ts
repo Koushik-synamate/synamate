@@ -61,6 +61,8 @@ export class GHL {
         },
       }
     );
+    console.log(respo.data);
+
     return respo.data;
   }
 
@@ -220,8 +222,6 @@ export class GHL {
           },
         }
       );
-      console.log(respo);
-
       this.model.saveInstallationInfo(resp.data);
     } catch (error: any) {
       console.error(error?.response?.data);
