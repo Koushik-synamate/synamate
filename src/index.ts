@@ -121,7 +121,7 @@ app.post("/store-razorpay", async (req: Request, res: Response) => {
     return res.status(400).send("Please send valid key");
   }
   try {
-    const data = ghl.getRazorpayToken(code);
+    const data = await ghl.getRazorpayToken(code);
     console.log(data);
 
     res.send(data);
