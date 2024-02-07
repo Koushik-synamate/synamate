@@ -29,35 +29,35 @@ export class GHL {
     await this.generateAccessTokenRefreshTokenPair(code);
   }
 
-  // decryptSSOData(key: string) {
-  //   console.log(key);
-  //   const data = CryptoJS.AES.decrypt(
-  //     key.toString(),
-  //     process.env.GHL_APP_SSO_KEY as string
-  //   ).toString(CryptoJS.enc.Utf8);
-  //   console.log(data);
-
-  //   return JSON.parse(data);
-  // }
-
   decryptSSOData(key: string) {
     console.log(key);
-    try {
-      const str = "0d42ec37-9620-4d63-a113-8a3a8f064a04";
-      const keys =
-        "U2FsdGVkX19HMLKhYCHi6Dsb6usaomwP7lDUgJtLzMglvFDG3Ieic57nYMxOjNaC7XRBYGVTUiCuJbxVv2U9fV+sBiKBdE2D0230QRCR/UlGB/qb1ocFVTUfpGO95IejiOjJu+bmIUjpw1WI38LtlUtQ+uZBv7mGeVwQFs8EbbmxXPjELA7BT3SDKENMhmGECdmGEW6GDw6FPsw/82zt8w==";
-      const decryptedData = CryptoJS.AES.decrypt(key, str);
-      console.log(decryptedData);
+    const data = CryptoJS.AES.decrypt(
+      key.toString(),
+      process.env.GHL_APP_SSO_KEY as string
+    ).toString(CryptoJS.enc.Utf8);
+    console.log(data);
 
-      const dat = decryptedData.toString(CryptoJS.enc.Utf8);
-      console.log("asd" + dat);
-
-      return JSON.parse(dat);
-    } catch (error) {
-      console.error("Error decrypting data:", error);
-      return null; // or handle the error in an appropriate way
-    }
+    return JSON.parse(data);
   }
+
+  // decryptSSOData(key: string) {
+  //   console.log(key);
+  //   try {
+  //     const str = "0d42ec37-9620-4d63-a113-8a3a8f064a04";
+  //     const keys =
+  //       "U2FsdGVkX19HMLKhYCHi6Dsb6usaomwP7lDUgJtLzMglvFDG3Ieic57nYMxOjNaC7XRBYGVTUiCuJbxVv2U9fV+sBiKBdE2D0230QRCR/UlGB/qb1ocFVTUfpGO95IejiOjJu+bmIUjpw1WI38LtlUtQ+uZBv7mGeVwQFs8EbbmxXPjELA7BT3SDKENMhmGECdmGEW6GDw6FPsw/82zt8w==";
+  //     const decryptedData = CryptoJS.AES.decrypt(key, str);
+  //     console.log(decryptedData);
+
+  //     const dat = decryptedData.toString(CryptoJS.enc.Utf8);
+  //     console.log("asd" + dat);
+
+  //     return JSON.parse(dat);
+  //   } catch (error) {
+  //     console.error("Error decrypting data:", error);
+  //     return null; // or handle the error in an appropriate way
+  //   }
+  // }
 
   /**
    * The function creates an instance of Axios with a base URL and interceptors for handling
