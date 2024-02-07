@@ -46,10 +46,7 @@ export class GHL {
       const str = "0d42ec37-9620-4d63-a113-8a3a8f064a04";
       const keys =
         "U2FsdGVkX19HMLKhYCHi6Dsb6usaomwP7lDUgJtLzMglvFDG3Ieic57nYMxOjNaC7XRBYGVTUiCuJbxVv2U9fV+sBiKBdE2D0230QRCR/UlGB/qb1ocFVTUfpGO95IejiOjJu+bmIUjpw1WI38LtlUtQ+uZBv7mGeVwQFs8EbbmxXPjELA7BT3SDKENMhmGECdmGEW6GDw6FPsw/82zt8w==";
-      const decryptedData = CryptoJS.AES.decrypt(
-        key,
-        process.env.GHL_APP_SSO_KEY as string
-      );
+      const decryptedData = CryptoJS.AES.decrypt(key, str);
       console.log(decryptedData);
 
       const dat = decryptedData.toString(CryptoJS.enc.Utf8);
