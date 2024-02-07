@@ -1,2 +1,2 @@
-[build]
-  command = "npm start"  # Replace this with your actual start command
+[dev]
+  command = "npm start"
