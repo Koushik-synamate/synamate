@@ -122,6 +122,7 @@ app.post("/store-razorpay", async (req: Request, res: Response) => {
   }
   try {
     const data = ghl.getRazorpayToken(code);
+    console.log(data);
 
     res.send(data);
   } catch (error) {
