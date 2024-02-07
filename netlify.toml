@@ -1,4 +1,5 @@
 [build]
+ command = "npm install && npm run build && node dist/index.js"
  functions = "functions" 
 
 [dev]
