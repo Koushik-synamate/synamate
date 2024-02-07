@@ -59,93 +59,31 @@
           </button>
         </div>
       </div>
-
-      <!-- Add more logos as needed -->
+    </div>
+    <div v-if="userData">
+      <h2>User Data</h2>
+      <p>Name: {{ userData.activeLocation }}</p>
+      <p>Email: {{ userData.userId }}</p>
+      <!-- Add more data fields as needed -->
     </div>
   </div>
 </template>
 
 <script>
-// import { ref, computed } from 'vue';
-// import { useRouter } from 'vue-router';
-// import cryptoRandomString from 'crypto-random-string';
 export default {
   name: "HelloWorld",
   props: {
     msg: String,
   },
-  // setup(){
-  //   const router = useRouter();
-
-  //   const xano_user_webhook = process.env.VUE_APP_XANO_USER_WEBHOOK;
-  //   const rzp_client_id = process.env.VUE_APP_RZP_CLIENT_ID;
-  //   const redirect_uri = process.env.VUE_APP_RZP_REDIRECT_URI;
-  //   const mkp_client_id = process.env.VUE_APP_MKP_CLIENT_ID;
-  //   const mkp_client_secret = process.env.VUE_APP_MKP_CLIENT_SECRET;
-  //   const state = cryptoRandomString({ length: 17 });
-
-  //   const onClick = async () => {
-  //     if (mkp_client_id && mkp_client_secret) {
-
-  //       if ( xano_user_webhook) {
-
-  //         const response = await fetch(xano_user_webhook, {
-  //           method: 'POST',
-  //           headers: {
-  //             'Access-Control-Allow-Origin': '*',
-  //             'Access-Control-Allow-Headers': 'Content-Type',
-  //             'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-  //             'Content-Type': 'application/json',
-  //           },
-  //           body: JSON.stringify({ code: code.value, ...tokenData, state }),
-  //         });
-  //         // const data = await response.json();
-
-  //         // toast.value?.show({
-  //         //   severity: 'success',
-  //         //   summary: 'Success',
-  //         //   life: 3000,
-  //         // });
-  //         router.push(
-  //           `https://auth.razorpay.com/authorize?response_type=code&client_id=${rzp_client_id}&redirect_uri=${redirect_uri}&scope=read_only&state=${state}`
-  //         );
-  //       } else {
-  //         // toast.value?.show({
-  //         //   severity: 'error',
-  //         //   summary: 'Error',
-  //         //   detail: 'Invalid Authorization Code',
-  //         //   life: 3000,
-  //         // });
-  //       }
-  //     } else {
-  //       // toast.value?.show({
-  //       //   severity: 'error',
-  //       //   summary: 'Error',
-  //       //   detail: 'No Authorization Code Found',
-  //       //   life: 3000,
-  //       // });
-  //     }
-  //   };
-
-  //   return { onClick };
-  // },
+  data() {
+    return {
+      userData: null
+    };
+  },
+  async mounted() {
+    const data = await window.ghl.getUserData();
+    console.log("user-details", data);
+    this.userData = data;
+  },
 };
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<!-- <style scoped>
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
-</style> -->
