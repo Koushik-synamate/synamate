@@ -23,35 +23,33 @@ export default {
     const searchParams = new URLSearchParams(window.location.search);
     const code = searchParams.get("code");
     const state = searchParams.get("state");
-    const clientId = "NVC8JJWQBxQ0Mr";
-    const clientSecret = "aRdoKNQyeFMeIagh7Obomn9v";
-    const redirect_uri = "https://synamate-apps.onrender.com/success";
+    
     console.log(code);
     if (code && state) {
-      const tokenRequestOptions = {
-        method: "POST",
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Headers": "Content-Type",
-          "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify({
-          client_id: clientId,
-          client_secret: clientSecret,
-          grant_type: "authorization_code",
-          redirect_uri: redirect_uri,
-          code: code,
-        }),
-      };
+      // const tokenRequestOptions = {
+      //   method: "POST",
+      //   headers: {
+      //     "Access-Control-Allow-Origin": "*",
+      //     "Access-Control-Allow-Headers": "Content-Type",
+      //     "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+      //     "Content-Type": "application/json",
+      //     Accept: "application/json",
+      //   },
+      //   body: JSON.stringify({
+      //     client_id: clientId,
+      //     client_secret: clientSecret,
+      //     grant_type: "authorization_code",
+      //     redirect_uri: redirect_uri,
+      //     code: code,
+      //   }),
+      // };
 
       try {
-        const tokenResponse = await fetch(
-          "https://auth.razorpay.com/token",
-          tokenRequestOptions
-        );
-        const tokenData = await tokenResponse.json();
+        // const tokenResponse = await fetch(
+        //   "https://auth.razorpay.com/token",
+        //   tokenRequestOptions
+        // );
+        const tokenData = await window.ghl.getRazorpayToken(code);
         const rzp_user_update_webhook =
           "https://x8ki-letl-twmt.n7.xano.io/api:T7Cv6cHs/users_oauth_razorpay";
         if (!tokenData.error) {

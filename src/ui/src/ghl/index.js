@@ -26,4 +26,35 @@ export class GHL {
     console.log(data);
     return data
   }
+
+  async getRazorpayToken(code){
+    const clientId = "NVC8JJWQBxQ0Mr";
+    const clientSecret = "aRdoKNQyeFMeIagh7Obomn9v";
+    const redirect_uri = "https://synamate-apps.onrender.com/success";
+    if (code) {
+      const tokenRequestOptions = {
+        method: "POST",
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Headers": "Content-Type",
+          "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          client_id: clientId,
+          client_secret: clientSecret,
+          grant_type: "authorization_code",
+          redirect_uri: redirect_uri,
+          code: code,
+        }),
+      };
+      const tokenResponse = await fetch(
+        "https://auth.razorpay.com/token",
+        tokenRequestOptions
+      );
+      const tokenData = await tokenResponse.json();
+      return tokenData;
+    }
+  }
 }
