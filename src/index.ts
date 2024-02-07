@@ -115,6 +115,22 @@ app.post("/decrypt-sso", async (req: Request, res: Response) => {
   }
 });
 
+app.post("/store-razorpay", async (req: Request, res: Response) => {
+  const { code } = req.body || {};
+  if (!code) {
+    return res.status(400).send("Please send valid key");
+  }
+  try {
+    const data = ghl.getRazorpayToken(code);
+
+    res.send(data);
+  } catch (error) {
+    res.status(400).send("Invalid Key");
+
+    console.log(error);
+  }
+});
+
 /*`app.get("/", function (req, res) {
   res.sendFile(path + "index.html");
 });` sets up a route for the root URL ("/") of the server.  This is
