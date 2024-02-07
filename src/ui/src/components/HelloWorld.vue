@@ -89,7 +89,8 @@ export default {
     async redirectToRazorpay() {
       if (this.userData) {
         const rzpClientId = "NVC8JJWQBxQ0Mr";
-        const redirectUri = "https://synamate-apps.onrender.com/success";
+        const redirectUri =
+          "https://connect.synamate.com/workflow-app/razorpay/success";
         const xano_user_update =
           "https://x8ki-letl-twmt.n7.xano.io/api:b4aEH6dM/insert_state";
         const state = Math.random().toString(36).slice(2);
