@@ -114,7 +114,9 @@ app.post("/decrypt-sso", async (req: Request, res: Response) => {
 
     res.send(data);
   } catch (error) {
+    console.log(error);
     res.status(400).send("Invalid Key");
+    
     console.log(error);
   }
 });
