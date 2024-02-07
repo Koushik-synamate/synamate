@@ -16,7 +16,7 @@
         </div>
         <div class="flex items-center justify-center">
           <button
-            @click="onClick"
+            @click="redirectToRazorpay"
             class="mt-8 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
           >
             Connect
@@ -77,13 +77,45 @@ export default {
   },
   data() {
     return {
-      userData: null
+      userData: null,
     };
   },
   async mounted() {
     const data = await window.ghl.getUserData();
     console.log("user-details", data);
     this.userData = data;
+  },
+  methods: {
+    async redirectToRazorpay() {
+      if (this.userData) {
+        const rzpClientId = "NVC8JJWQBxQ0Mr";
+        const redirectUri = "https://synamate-apps.onrender.com/success";
+        const xano_user_update =
+          "https://x8ki-letl-twmt.n7.xano.io/api:b4aEH6dM/insert_state";
+        const state = Math.random().toString(36).slice(2);
+        const location_id = this.userData.activeLocation;
+
+        const response = await fetch(xano_user_update, {
+          method: "POST",
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Headers": "Content-Type",
+            "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ location_id, state }),
+        });
+        const data = await response.json();
+        console.log(data);
+
+        const url = `https://auth.razorpay.com/authorize?response_type=code&client_id=${rzpClientId}&redirect_uri=${redirectUri}&scope=read_only&state=${state}`;
+
+        // Redirect the user to the specified URL
+        if (data) {
+          window.location.href = url;
+        }
+      }
+    },
   },
 };
 </script>

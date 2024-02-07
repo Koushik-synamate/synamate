@@ -1,23 +1,21 @@
-
 <template>
-  
-  <HelloWorld msg="Welcome to Synamate workflow payments"/>
+  <router-view />
+  <HelloWorld msg="Welcome to Synamate workflow payments" />
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-import './index.css'
+import HelloWorld from "./components/HelloWorld.vue";
+import "./index.css";
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld
+    HelloWorld,
   },
-  async mounted(){
-    
+  async mounted() {
     const data = await window.ghl.getUserData();
-    console.log("user-details", data)
-  }
-}
+    console.log("user-details", data);
+  },
+};
 </script>
 
 <style>

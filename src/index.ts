@@ -3,17 +3,13 @@ for handling HTTP requests. */
 import express, { Express, Request, Response } from "express";
 import dotenv from "dotenv";
 import { GHL } from "./ghl";
-import * as CryptoJS from "crypto-js";
 import { json } from "body-parser";
-import { log } from "console";
 
 const path = __dirname + "/ui/dist/";
 
 dotenv.config();
 const app: Express = express();
-const router = express.Router();
 app.use(json({ type: "application/json" }));
-app.use("/.netlify/functions/index", router);
 /*`app.use(express.static(path));` is setting up a middleware in the Express server. The
 `express.static` middleware is used to serve static files such as HTML, CSS, JavaScript, and images. */
 app.use(express.static(path));
