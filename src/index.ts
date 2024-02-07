@@ -123,7 +123,6 @@ app.post("/store-razorpay", async (req: Request, res: Response) => {
   try {
     const data = await ghl.getRazorpayToken(code);
     console.log(data);
-
     res.send(data);
   } catch (error) {
     res.status(400).send("Invalid Key");
