@@ -1,15 +1,15 @@
 <template>
+  <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
   <router-view />
-  <HelloWorld msg="Welcome to Synamate workflow payments" />
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
+// import HelloWorld from "./components/HelloWorld.vue";
 import "./index.css";
 export default {
   name: "App",
   components: {
-    HelloWorld,
+    // HelloWorld,
   },
   async mounted() {
     const data = await window.ghl.getUserData();
